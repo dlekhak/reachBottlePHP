@@ -1,0 +1,93 @@
+<?php
+require('includes/header.php');
+?>
+    <div class="container" style="background-color: #B1DDCF">
+        <header class="jumbotron mx-5 pt-3 pb-3">
+            <img class="img-responsive" width="270px" src="<?php echo $assets_dir;?>images/reachbottle_logo.png">
+        </header>
+        <div class="progress m-lg-5">
+            <div class="progress-bar progress-bar" role="progressbar" style="width:33.33%">
+                <a class="linkcolor" href="<?php echo $site_url;?>cart">Cart</a>
+            </div>
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width:33.33%">
+                <a href="<?php echo $site_url;?>pickup_details">Details</a>
+            </div>
+        </div>
+        <div class="panel panel-info " style="background-color: #DEE4E4">
+            <div class="panel-heading px-5">
+               <strong>Customer Information</strong>
+            </div>
+            <div class="panel-body px-5">
+                <form name="frmcontact" action="<?php echo $site_url;?>addorder" method="post" class=" mx-5 mt-3">
+                    <div class="form-group mx-auto">
+                        <label for="fname">First Name:</label>
+                        <input type="text" class="form-control" name="fname" value="" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="lname">Last Name:</label>
+                        <input type="text" class="form-control" name="lname" value="" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="address1">Address 1:</label>
+                        <input type="text" class="form-control" name="address1" value="" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="address2">Address 2:</label>
+                        <input type="text" class="form-control" name="address2" value="" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="postalcode">Postal Code:</label>
+                        <input type="text" class="form-control" name="postalcode" value="" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" name="email" value="" />
+                    </div>
+                    <div class="form-group">
+                        <label for="cell">Phone Number:</label>
+                        <input type="tel" class="form-control" name="phone" value="" />
+                    </div>
+                    <div class="form-group">
+                        <label for="delivery_schedule">Pick up date:</label>
+                        <input autocomplete="off" name="delivery_schedule" id="datetimepicker3" type="text" value="" required />
+                        <span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span>
+                    </div>
+
+                    <br>
+                    <button type="submit" class="btn btn-primary">Click to Submit</button>
+                    <hr/>
+                </form>
+
+                <script type="text/javascript">
+                    jQuery(function() {
+                        jQuery('#datetimepicker3').datetimepicker({
+                            pickDate: false,
+                            minDate:'<?php echo date('Y/m/d',time() + (24 * 60 * 60));?>',
+                            allowTimes:[
+                                '08:00',
+                                '09:00',
+                                '10:00',
+                                '11:00',
+                                '12:00',
+                                '13:00',
+                                '14:00',
+                                '15:00',
+                                '16:00',
+                                '17:00',
+                                '18:00',
+                                '19:00',
+                                '20:00',
+                            ]
+                        });
+                    });
+                </script>
+                <link rel="stylesheet" type="text/css" href="<?php echo $assets_dir;?>datetimepicker/jquery.datetimepicker.css" />
+                <script src="<?php echo $assets_dir;?>datetimepicker/build/jquery.datetimepicker.full.min.js"></script>
+            </div>
+        </div>
+    </div>
+    <h3 style="text-align: center">
+        <a href="<?php echo $site_url;?>vs/pickup_details" target="_blank">View Source</a>
+    </h3>
+
+<?php require('includes/footer.php');

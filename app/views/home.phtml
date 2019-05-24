@@ -1,0 +1,50 @@
+<?php
+require('includes/header.php');
+?>
+    <div class="container" style="background-color: #B1DDCF">
+        <!-- Jumbotron Header -->
+        <header class="jumbotron mx-5 pt-2">
+            <img class="img-responsive" width="270px" src="<?php echo $assets_dir;?>images/reachbottle_logo.png">
+            <p class="lead">Welcome to Reach bottle, reach bottle is a market place where you can sell your empty/used bottles, cans and tetrapacks. Help our environment by recycling non degradable things.</p>
+        </header>
+
+        <!-- Page Features -->
+        <div class="row text-center">
+
+            <?php
+            $image = 1;
+            foreach($items as $item) {
+                ?>
+                <div class="col-lg-3 col-md-6 mb-4 pl-4">
+                    <div class="card"  style="background-color: #B2C6AF">
+                        <?php $items_image = DS.'item_images'.DS.$image++.'.jpg';  ?>
+                        <img class="card-img-top img-responsive" src="<?php echo $assets_dir.$items_image;?>" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title"><?php echo $item['container_type']?></h4>
+                            <strong>Container type:</strong> <span><?php echo $item['return_container_type']?></span>
+                            <br />
+                            <strong>Value:&nbsp;$</strong> <span><?php echo number_format($item['deposit_value'],2).' '.$item['deposit_unit'];?></span>
+                         </div>
+                        <form method="post" action="<?php echo $site_url;?>updatecart">
+                            <div class="px-lg-5"><strong>Quantity:</strong>
+                                <input type="number" name="qty" class="form-control text-center" value="1" />
+                            </div>
+                            <div class="card-footer">
+                                <input type="hidden" name="item_id" value="<?php echo $item['id']?>" />
+                                <input type="submit" style="cursor: pointer;" name="add_to_cart" value="Add to Cart" class="btn btn-primary" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <?php
+            }
+            ?>
+
+        </div>
+        <!-- /.row -->
+    </div>
+    <h3 style="text-align: center">
+        <a href="<?php echo $site_url;?>vs/home" target="_blank">View Source</a>
+    </h3>
+<?php
+require('includes/footer.php');

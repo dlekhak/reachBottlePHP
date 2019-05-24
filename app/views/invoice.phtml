@@ -1,0 +1,96 @@
+<?php require('includes/header.php');
+?>
+    <div class="container" style="background-color: #B1DDCF">
+        <header class="jumbotron mx-5 pt-3 pb-3">
+            <img class="img-responsive" width="270px" src="<?php echo $assets_dir;?>images/reachbottle_logo.png">
+        </header>
+        <div class="progress m-lg-5">
+            <div class="progress-bar progress-bar" role="progressbar" style="width:33.33%">
+                <a class="linkcolor" href="<?php echo $site_url;?>cart">Cart</a>
+            </div>
+            <div class="progress-bar progress-bar-success" role="progressbar" style="width:33.33%">
+                <a href="<?php echo $site_url;?>pickup_details">Details</a>
+            </div>
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width:33.33%">
+                <a href="<?php echo $site_url;?>invoice">Invoice</a>
+            </div>
+        </div>
+        <table class="table table-bordered table-success table-hover" width="100%">
+            <thead class="thead-default">
+            <tr><td colspan="4" style="background: #089975; color: whitesmoke"><h1 class="display-5" align="center">Please confirm your pick up detail!</h1></td> </tr>
+            <tr>
+                <th>User</th>
+                <th>Order Date</th>
+                <th>Pick up Schedule</th>
+
+            </tr>
+            </thead>
+
+            <?php
+            if(is_array($order_information)) {
+                    ?>
+                    <tbody>
+                    <tr>
+                        <td><?php echo $order_information[0]['order']['name']; ?></td>
+                        <td rowspan="3"><?php echo $order_information[0]['order']['order_date_time']; ?></td>
+                        <td rowspan="3"><?php echo $order_information[0]['order']['delivery_schedule'] ?></td>
+
+                    </tr>
+                    <tr>
+                        <td>Phone no.: <?php echo $order_information[0]['order']['phone']; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Email: <?php echo $order_information[0]['order']['email']; ?></td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="5" class="pl-5"><strong><em>Detail</em></strong></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">
+                            <table width="100%">
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Quantity</th>
+                                    <th>Amount</th>
+                                </tr>
+                                <?php
+                                $total = 0;
+                                foreach ($order_information[0]['items'] as $item) {
+                                    $total += $item['deposit_value'] * $item['qty'];
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $item['container_type']; ?></td>
+                                        <td><?php echo $item['qty']; ?></td>
+                                        <td>$<?php echo number_format($item['deposit_value'] * $item['qty'],2); ?></td>
+                                    </tr>
+                                    <?php
+                                }
+                                ?>
+                                <tr>
+                                    <td colspan="3" class="text-right pr-4"><strong>Order Total:</strong> $<?php echo number_format($total,2); ?></td>
+                                </tr>
+                                <tr><td colspan="4"><div align="center"> <a role="button" class="btn btn-danger" href="<?php echo $site_url;?>thankyou">Please click to confirm</a></div></td> </tr>
+                            </table>
+                            <hr/>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                    <?php
+            }else{
+                ?>
+                <tr>
+                    <td colspan="5">No record found.</td>
+                </tr>
+                <?php
+            }
+            ?>
+
+        </table>
+
+    </div>
+    <h3 style="text-align: center">
+        <a href="<?php echo $site_url;?>vs/invoice" target="_blank">View Source</a>
+    </h3>
+<?php require('includes/footer.php');

@@ -1,0 +1,80 @@
+<?php require('includes/header.php');
+?>
+<div class="container" style="background-color: #B1DDCF">
+    <header class="jumbotron mx-5 pt-3 pb-3">
+        <img class="img-responsive" width="270px" src="<?php echo $assets_dir;?>images/reachbottle_logo.png">
+    </header>
+
+    <div class="row">
+        <div class=" pl-5  ">
+            <div class="well well-sm">
+                <form name="contactform" method="post" action="<?php echo $site_url;?>contact">
+                    <?php
+                    if ( isset($_POST['submit'])) {
+                        ?>
+                        <div class="jumbotron text-center">
+                            <h6 class="display-3">Thank you <em><?php echo $_POST['first_name'];?></em>  for contacting us. We will be in touch with you very soon.</h6>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                    <table width="100%">
+
+                        <tr>
+                            <td align="right">
+                                <label for="first_name">First Name *</label>
+                            </td>
+                            <td >
+                                <input  type="text" name="first_name" required>
+                            </td>
+                        </tr>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                <label for="last_name">Last Name *</label>
+                            </td>
+                            <td>
+                                <input  type="text" name="last_name" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                <label for="email">Email Address *</label>
+                            </td>
+                            <td>
+                                <input  type="email" name="email" required>
+                            </td>
+                        </tr>
+                        <tr >
+                            <td align="right">
+                                <label for="telephone">Telephone Number</label>
+                            </td>
+                            <td>
+                                <input  type="text" name="telephone" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right" valign="top">
+                                <label for="comments">Comments *</label>
+                            </td>
+                            <td>
+                                <textarea  name="comments" maxlength="1000" cols="25" rows="6" required></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align:center">
+                                <button type="submit" name="submit" class="btn btn-primary btn-lg" >Submit</button>
+                            </td>
+                        </tr>
+
+                    </table>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<?php
+require('includes/footer.php');
